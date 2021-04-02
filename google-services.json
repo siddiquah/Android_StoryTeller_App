@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "376437062223",
+    "firebase_url": "https://storytellerapp-sanjum-default-rtdb.firebaseio.com",
+    "project_id": "storytellerapp-sanjum",
+    "storage_bucket": "storytellerapp-sanjum.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376437062223:android:f77353498b1a712d4b883a",
+        "android_client_info": {
+          "package_name": "com.example.storytellerapp_sanjum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376437062223-sd77br3lr5fvql9gvf1vm8k66e2v8u20.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAayIIj7CLriU4kEuPYmYdrjEnSX1fwDsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376437062223-sd77br3lr5fvql9gvf1vm8k66e2v8u20.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
