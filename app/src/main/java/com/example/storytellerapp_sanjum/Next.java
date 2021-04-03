@@ -5,15 +5,20 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
 public class Next extends AppCompatActivity {
 
     TextView txt;
+    ScrollView scrollView;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +33,18 @@ public class Next extends AppCompatActivity {
 
 
         txt = findViewById(R.id.next_txt);
+        scrollView = findViewById(R.id.page_scroll);
 
-        String t = getIntent().getStringExtra("key");
-        txt.setText(t);
+        MyStory story = (MyStory) getIntent().getSerializableExtra("story");
+        txt.setText(story.getStory());
 
+        setTitle(story.getTitle());
+
+
+        int[] colors = {Color.parseColor("#ffffff"),Color.parseColor(story.getColor())};
+        GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TL_BR, colors);
+
+        scrollView.setBackground(gd);
     }
 
     @Override

@@ -1,15 +1,20 @@
 package com.example.storytellerapp_sanjum;
 
-public class MyStory {
+import java.io.Serializable;
+
+public class MyStory implements Serializable {
     String title;
     String story;
+
+    String color;
 
     public MyStory() {
 
     }
-    public MyStory(String title, String story) {
+    public MyStory(String title, String story, String color) {
         this.title = title;
         this.story = story;
+        this.color = color;
     }
 
     public String getTitle() {
@@ -26,5 +31,13 @@ public class MyStory {
 
     public void setStory(String story) {
         this.story = story;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

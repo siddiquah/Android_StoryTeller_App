@@ -1,10 +1,13 @@
 package com.example.storytellerapp_sanjum;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,13 +23,21 @@ public class StoryAdapter  extends ArrayAdapter<MyStory> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyStory story = getItem(position);
+
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item, parent, false);
         }
         // Lookup view for data population
+        LinearLayout wrap = (LinearLayout) convertView.findViewById(R.id.item_wrap);
         TextView title = (TextView) convertView.findViewById(R.id.item_txt);
         TextView snipet = (TextView) convertView.findViewById(R.id.snipet);
+
+        int[] colors = {Color.parseColor("#ffffff"),Color.parseColor(story.getColor())};
+        GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TL_BR, colors);
+
+        wrap.setBackground(gd);
+
         // Populate the data into the template view using the data object
         title.setText(story.getTitle());
         snipet.setText(story.getStory());
