@@ -2,10 +2,14 @@ package com.example.storytellerapp_sanjum;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -89,5 +94,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.searchview, menu);
+        MenuItem menuItem = menu.findItem(R.id.searchIcon);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Search stories");
+
+        ArrayList searchedStories = new ArrayList<MyStory>();
+        StoryAdapter newAdapter = new StoryAdapter(this, searchedStories);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            public void searchStories(String query) {
+                String q = query.toLowerCase();
+                searchedStories.clear();
+                for(int i=0; i<stories.size(); i++) {
+                    MyStory story = stories.get(i);
+                    if(story.getTitle().toLowerCase().contains(q)) {
+                        searchedStories.add(stories.get(i));
+                    }
+                }
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchStories(query);
+                listView.setAdapter(newAdapter);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchStories(newText);
+                listView.setAdapter(newAdapter);
+                return false;
+            }
+
+        });
+
+        menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                searchedStories.clear();
+                searchedStories.addAll(stories);
+                listView.setAdapter(newAdapter);
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }
