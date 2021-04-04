@@ -35,6 +35,7 @@ public class StoryAdapter  extends ArrayAdapter<MyStory> {
 
         int[] colors = {Color.parseColor("#ffffff"),Color.parseColor(story.getColor())};
         GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TL_BR, colors);
+        gd.setCornerRadius(16.0f);
 
         wrap.setBackground(gd);
 

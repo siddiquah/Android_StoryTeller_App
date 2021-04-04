@@ -8,8 +8,11 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
+
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
+        android:divider="@null"
         android:layout_height="match_parent" />
 </android.widget.LinearLayout>
