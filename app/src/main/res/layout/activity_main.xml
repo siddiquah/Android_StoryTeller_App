@@ -8,11 +8,19 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-
+    <ProgressBar
+        android:id="@+id/pBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible">
+    </ProgressBar>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:divider="@null"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="invisible"/>
 </android.widget.LinearLayout>

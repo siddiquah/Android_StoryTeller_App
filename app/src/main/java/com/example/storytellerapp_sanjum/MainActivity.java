@@ -6,13 +6,12 @@ import androidx.appcompat.widget.SearchView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,11 +20,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView;
+    ProgressBar pBar;
     DatabaseReference databaseReference;
     ArrayList<MyStory> stories;
     StoryAdapter adapter;
@@ -61,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView= findViewById(R.id.listView);
+        pBar = findViewById(R.id.pBar);
+        listView = findViewById(R.id.listView);
         databaseReference = FirebaseDatabase.getInstance().getReference("StoryTeller");
         stories = new ArrayList<MyStory>();
         adapter = new StoryAdapter(this, stories);
-
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
                     myStory.setColor(getRandomColor());
                     stories.add(0, myStory);
                 }
+
+                pBar.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
+
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -93,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
